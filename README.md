@@ -49,12 +49,17 @@ Here below are listed the instruction for install:
 
 ## How to use
 
-Once the app is running, go to `example.com/gsync/` (replace `example.com` by your own domain name).
-
-The follwoing is very simple:
+Once the app is running, go through the following steps :
 
 1. [Publish a PostGIS table with GeoServer](https://docs.geoserver.org/stable/en/user/gettingstarted/postgis-quickstart/index.html)
 
-2. Click
+2. With admin permissions, go to `example.com/gsync/` (replace `example.com` by your own domain name). 
+    
+    - You should reach the page below:
+    ![Preview image](https://user-images.githubusercontent.com/111574152/193546103-6ca375c7-aff6-48ad-ac2f-1fb9bc70daca.png)
 
-![Preview image](https://user-images.githubusercontent.com/111574152/193546103-6ca375c7-aff6-48ad-ac2f-1fb9bc70daca.png)
+    - If 404 is returned, check if your user has administration rights.
+
+3. Click on the button `Sync with GeoServer`. Once the green chekmark appear, you can navigate to the `Data` page. Your layers should be available here.
+
+4. Be careful, these layers are published with Geonode's default permissions. <span style="color: red;">**So you must check the layer permissions right after publication.**</span>
