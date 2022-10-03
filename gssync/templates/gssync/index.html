@@ -1,0 +1,127 @@
+{% extends "geonode_base.html" %}
+
+{% load i18n %}
+
+{% block title %} {% trans "About GeoNode" %} — {{ block.super }} {% endblock %}
+
+{% block body_outer %}
+<style>
+    .custom_loader {
+        border: 3px solid #f3f3f3;
+        /* Light grey */
+        border-top: 3px solid #3498db;
+        display: inline-block;
+        /* Blue */
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        animation: custom_spin 2s linear infinite;
+        vertical-align: middle;
+    }
+
+    @keyframes custom_spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    :root {
+    --borderWidth: 3px;
+    --height: 15px;
+    --width: 10px;
+    --borderColor: #78b13f;
+    }
+
+
+    .checkmark {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: var(--height);
+    width: var(--width);
+    margin:2px;
+    border-bottom: var(--borderWidth) solid var(--borderColor);
+    border-right: var(--borderWidth) solid var(--borderColor);
+    }
+    </style>
+<div class="page-header">
+    <h2>{% translate "Retrieve layers from GeoServer" %}</h2>
+</div>
+<p>{% translate "Use the button below to retrieve layers from geoserver" %}</p>
+<!-- <div class="form-group">
+    <label for="prefix">Prefix</label>
+    <input name="prefix" type="prefix" class="form-control" id="prefix" aria-describedby="prefixHelp" placeholder="Enter prefix">
+    <small id="prefixHelp" class="form-text text-muted">This prefix is used by the importing tool to filter layers to be synced</small>
+</div> -->
+<button type="button" class="btn btn-primary" aria-label="Left Align" onclick="run_gssync()">
+    <span id="feedback-loading" class="glyphicon custom_loader" style="display:none;" aria-hidden="true"></span>
+    <span id="feedback-checked" class="glyphicon checkmark" style="display:none;" aria-hidden="true"></span>
+    {% translate "Sync with geoserver" %}
+</button>
+
+
+
+
+
+
+<script>
+
+    map = {}
+
+    function start_gssync(){
+
+        var init = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        fetch('/gssync/api/tasks/start/', init)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (res_json) {
+                var task_data = {
+                    'id': res_json.task_id,
+                    'url': new URL(window.location.origin + res_json.task_url),
+                }
+                //update_gssync_status(task_data)
+                setTimeout(update_gssync_status.bind(null, task_data) , 1000);
+            });
+    }
+
+    function update_gssync_status(task_data) {
+
+            var init = {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'default'
+            };
+            fetch(task_data.url, init)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (res_json) {
+                    if(res_json.state=="SUCCESS"){
+                        clearInterval(map.intervalid)
+                        window.document.querySelector('#feedback-loading').style.display = 'none'
+                        window.document.querySelector('#feedback-checked').style.display = 'inline-block'
+                    }
+                    else {
+                        setTimeout(update_gssync_status.bind(null, task_data), 1000);
+                    }
+                });
+        }
+
+    function run_gssync() {
+            window.document.querySelector('#feedback-checked').style.display = 'none'
+            window.document.querySelector('#feedback-loading').style.display = 'inline-block'
+            start_gssync()
+        }
+
+</script>
+
+{% endblock %}
