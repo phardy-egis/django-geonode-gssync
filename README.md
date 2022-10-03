@@ -46,3 +46,15 @@ Here below are listed the instruction for install:
 ### Install with pip
 
 (Section not yet written)
+
+## How to use
+
+Once the app is running, go to `example.com/gsync/` (replace `example.com` by your own domain name).
+
+The follwoing is very simple:
+
+1. [Publish a PostGIS table with GeoServer](https://docs.geoserver.org/stable/en/user/gettingstarted/postgis-quickstart/index.html)
+
+2. Click
+
+![Preview image](https://user-images.githubusercontent.com/111574152/193546103-6ca375c7-aff6-48ad-ac2f-1fb9bc70daca.png)
