@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block title %} {% trans "About GeoNode" %} — {{ block.super }} {% endblock %}
+{% block title %} {% trans "Sync GeoServer" %} — {{ block.super }} {% endblock %}
 
 {% block body_outer %}
 <style>
@@ -50,9 +50,9 @@
 <div class="page-header">
     <h2>{% translate "Retrieve layers from GeoServer" %}</h2>
 </div>
-<p>{% translate "Use the button below to retrieve layers from geoserver" %}</p>
+<p>{% translate "Use the button below to add new layers to GeoServer" %}</p>
 <!-- <div class="form-group">
-    <label for="prefix">Prefix</label>
+    <label for="prefix">Prefix used to filter GeoServer layers</label>
     <input name="prefix" type="prefix" class="form-control" id="prefix" aria-describedby="prefixHelp" placeholder="Enter prefix">
     <small id="prefixHelp" class="form-text text-muted">This prefix is used by the importing tool to filter layers to be synced</small>
 </div> -->
@@ -79,7 +79,17 @@
             cache: 'default'
         };
 
-        fetch('/gssync/api/tasks/start/', init)
+        // Composing URL
+        start_url =  new URL(window.location.origin+ '/gssync/api/tasks/start/')
+
+        // Adding "filter" parameter prior running the http request
+        // url_filter = document.getElementById('prefix').value
+        // start_url.searchParams.append('filter', url_filter);
+
+        console.log(start_url)
+
+        // Running the HTTP request
+        fetch(start_url, init)
             .then(function (response) {
                 return response.json();
             })
@@ -89,6 +99,7 @@
                     'url': new URL(window.location.origin + res_json.task_url),
                 }
                 //update_gssync_status(task_data)
+
                 setTimeout(update_gssync_status.bind(null, task_data) , 1000);
             });
     }

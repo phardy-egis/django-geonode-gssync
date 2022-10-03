@@ -24,6 +24,11 @@ def index(request):
 def start_task(request):
     # Only users with admin permissions have access to this view
     if request.user.is_superuser:
+        
+        # Getting parameters
+        # filterarg = request.GET.get('filter','')
+        # print('filter: {filterarg}'.format(filterarg=filterarg))
+
         # Starting celery task
         task = gssync_task.delay()
         response_data = {
