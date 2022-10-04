@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.1.1...v0.1.2) (2022-10-04)
+
+
+### Documentation
+
+* **main:** inversed geonode mentions ([a724ea1](https://github.com/phardy-egis/django-geonode-gssync/commit/a724ea1fa365382f2df7ca256c47c132c97cdf8c))
+
 ## [0.1.1](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.1.0...v0.1.1) (2022-10-03)
 
 
