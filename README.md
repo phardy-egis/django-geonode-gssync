@@ -19,7 +19,7 @@ Here below are listed the instruction for install:
 2. Add "gssync" to your INSTALLED_APPS by adding the following lines at the end of `./geonode/settings.py` file:
 
     ```python
-    if "geonode.gssync" in settings.INSTALLED_APPS:
+    if "geonode.gssync" in INSTALLED_APPS:
         urlpatterns += [  # '',
             url(r'^gssync/', include('geonode.gssync.urls')),
         ]
