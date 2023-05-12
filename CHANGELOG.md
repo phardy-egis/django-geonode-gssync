@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.2.0...v0.2.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* bug due to user profile retrieval ([5c888a7](https://github.com/phardy-egis/django-geonode-gssync/commit/5c888a7ecf87f10cc7265834d8cd4876d188a658))
+
 ## [0.2.0](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.1.2...v0.2.0) (2023-05-12)
 
 
