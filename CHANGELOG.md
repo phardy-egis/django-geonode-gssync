@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.0](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.1.2...v0.2.0) (2023-05-12)
+
+
+### Features
+
+* addition of hot reload support for celery in development mode ([5273824](https://github.com/phardy-egis/django-geonode-gssync/commit/527382406405f784067c75855a2793161588b616))
+* detailed feedback to user ([ac9b964](https://github.com/phardy-egis/django-geonode-gssync/commit/ac9b9644465a20f0faf8bb791f4d23d609c03fa0))
+* geoserver layer filtering by prefix ([e3ca095](https://github.com/phardy-egis/django-geonode-gssync/commit/e3ca0952bc3bd7b154a738c561cef9d3208fa8b5))
+
 ## [0.1.2](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.1.1...v0.1.2) (2022-10-04)
 
 
