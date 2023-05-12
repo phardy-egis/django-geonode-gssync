@@ -48,7 +48,7 @@
     }
     </style>
 <div class="page-header">
-    <h2>{% translate "Retrieve layers from GeoServer" %}</h2>
+    <h2>{% translate "Sync layers with GeoServer" %}</h2>
 </div>
 <p>{% translate "Use the button below to add new layers to GeoServer" %}</p>
 <!-- <div class="form-group">
@@ -56,6 +56,12 @@
     <input name="prefix" type="prefix" class="form-control" id="prefix" aria-describedby="prefixHelp" placeholder="Enter prefix">
     <small id="prefixHelp" class="form-text text-muted">This prefix is used by the importing tool to filter layers to be synced</small>
 </div> -->
+<div class="form-group">
+    <label for="inputFilter">Filter prefix</label>
+    <input type="email" class="form-control" id="inputFilter" aria-describedby="inputFilterHelp" placeholder="Enter layer prefix used for filtering">
+    <small id="inputFilterHelp" class="form-text text-muted">This filter is used as a prefix to filter layers to be synced with geoserver</small>
+</div>
+
 <button type="button" class="btn btn-primary" aria-label="Left Align" onclick="run_gssync()">
     <span id="feedback-loading" class="glyphicon custom_loader" style="display:none;" aria-hidden="true"></span>
     <span id="feedback-checked" class="glyphicon checkmark" style="display:none;" aria-hidden="true"></span>
@@ -70,23 +76,23 @@
 <script>
 
     map = {}
+    var gssync_active = false
 
     function start_gssync(){
-
+        
+        // Parameters of query
         var init = {
             method: 'GET',
             mode: 'cors',
             cache: 'default'
         };
+        
+        // Getting content of input
+        filter_value = document.getElementById('inputFilter').value
 
         // Composing URL
         start_url =  new URL(window.location.origin+ '/gssync/api/tasks/start/')
-
-        // Adding "filter" parameter prior running the http request
-        // url_filter = document.getElementById('prefix').value
-        // start_url.searchParams.append('filter', url_filter);
-
-        console.log(start_url)
+        start_url.searchParams.append('filter', filter_value)
 
         // Running the HTTP request
         fetch(start_url, init)
@@ -130,7 +136,14 @@
     function run_gssync() {
             window.document.querySelector('#feedback-checked').style.display = 'none'
             window.document.querySelector('#feedback-loading').style.display = 'inline-block'
-            start_gssync()
+            if(!gssync_active){
+                gssync_active = true
+                start_gssync()
+                gssync_active = false
+            }
+            else {
+                alert("GSync is already running, please wait until active sync is complete.")
+            }
         }
 
 </script>
