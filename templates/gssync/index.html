@@ -68,6 +68,35 @@
     {% translate "Sync with geoserver" %}
 </button>
 
+<!-- Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SUCCESS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sync of layers was successful
+                <div>
+                    <h3>Stats</h3>
+                    <p id="stats-failed"></p>
+                    <p id="stats-updated"></p>
+                    <p id="stats-created"></p>
+                    <p id="stats-deleted"></p>
+                    <p id="stats-duration"></p>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -126,6 +155,13 @@
                         clearInterval(map.intervalid)
                         window.document.querySelector('#feedback-loading').style.display = 'none'
                         window.document.querySelector('#feedback-checked').style.display = 'inline-block'
+
+                        document.getElementById('stats-failed').innerHTML = `${res_json.details.result.stats.failed} failed`;
+                        document.getElementById('stats-updated').innerHTML = `${res_json.details.result.stats.updated} were updated`;
+                        document.getElementById('stats-created').innerHTML = `${res_json.details.result.stats.created} were created`;
+                        document.getElementById('stats-deleted').innerHTML = `${res_json.details.result.stats.deleted} were deleted`;
+                        document.getElementById('stats-duration').innerHTML = `Duration: ${res_json.details.result.stats.duration_sec}s`;
+                        $('#feedbackModal').modal({show:true})
                     }
                     else {
                         setTimeout(update_gssync_status.bind(null, task_data), 1000);
