@@ -1,10 +1,6 @@
 # Web
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, Http404
-import json
-
-# Management commands
-from django.core.management import call_command
+from django.http import JsonResponse, Http404
 
 # Celery results
 from .tasks import gssync_task
@@ -27,6 +23,7 @@ def start_task(request):
     # The block of code below is taken from geonode\geoserver\views.py function updatelayers
     params = request.GET
     owner = request.user.username
+    
     filter = params.get("filter", None)
 
     # Only users with admin permissions have access to this view
