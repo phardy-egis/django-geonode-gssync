@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.2.1...v0.3.0) (2024-08-26)
+
+
+### Features
+
+* added helper that contains function for synchronous creation of layer ([e7a604a](https://github.com/phardy-egis/django-geonode-gssync/commit/e7a604afaa1248692f78d6b43a300fcfde7ee69d))
+* API endpoint with detailed bunch of parameters is now operational ([4acd8fe](https://github.com/phardy-egis/django-geonode-gssync/commit/4acd8fea905b926be0b37112ecb2e4dd102491c9))
+
+
+### Documentation
+
+* updated docs with re_path instead of url ([6fc9291](https://github.com/phardy-egis/django-geonode-gssync/commit/6fc9291a042856c089b874fdd9f0caea0b9c9593))
+
 ## [0.2.1](https://github.com/phardy-egis/django-geonode-gssync/compare/v0.2.0...v0.2.1) (2023-05-12)
 
 
