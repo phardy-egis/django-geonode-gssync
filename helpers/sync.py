@@ -99,13 +99,3 @@ def sync_dataset_from_geoserver(user_id, geoserver_layer_name, geoserver_layer_w
     resource_manager.update(layer.uuid, instance=layer, notify=False)
     
     return layer.pk
-
-# from django.contrib.auth import get_user_model
-# user_profile = get_user_model().objects.filter(username='super_admin').first()    
-# sync_dataset_from_geoserver(
-#     user_profile,
-#     'geonode:7081f88e-dc07-461d-bce6-6c6f709e3b8b_0x66a27b03',
-#     'Critère prétraité',
-#     'gmva-utilisateurs-mca',
-#     'gmva-administrateurs-mca'
-# )
